@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — yOURs.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --espresso: #3A2D28;
+      --mocha: #A48374;
+      --terra: #D88B79;
+      --sand: #CBAD8D;
+      --linen: #D1C7BD;
+      --crimson: #A71F13;
+      --off-white: #F7F3EF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: var(--off-white); color: var(--espresso); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(247,243,239,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(58,45,40,0.08);
+    }
+    .nav-logo { font-size: 1.6rem; font-weight: 600; color: var(--espresso); text-decoration: none; }
+    .nav-logo span { color: var(--mocha); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--espresso); text-decoration: none; opacity: 0.7;
+    }
+    .nav-links a.active, .nav-links a:hover { opacity: 1; }
+
+    /* LAYOUT */
+    .contact-layout {
+      padding-top: 80px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    /* LEFT — DARK */
+    .contact-left {
+      background: var(--espresso);
+      padding: 6rem 4rem 6rem 5rem;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-left::before {
+      content: '';
+      position: absolute; bottom: -80px; left: -80px;
+      width: 360px; height: 360px; border-radius: 50%;
+      border: 1px solid rgba(203,173,141,0.12);
+    }
+    .page-eyebrow {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--terra); margin-bottom: 1.4rem;
+    }
+    .contact-title {
+      font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 500;
+      color: var(--linen); line-height: 1.15; margin-bottom: 2rem;
+    }
+    .contact-title em { color: var(--terra); font-style: italic; }
+    .contact-intro {
+      font-size: 1.05rem; line-height: 1.9; font-weight: 300;
+      color: var(--sand); opacity: 0.85; margin-bottom: 3rem; max-width: 400px;
+    }
+    .contact-detail { margin-bottom: 2rem; }
+    .contact-detail-label {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--terra); margin-bottom: 0.4rem;
+    }
+    .contact-detail-value {
+      font-size: 1.1rem; font-weight: 400; color: var(--linen);
+    }
+    .contact-detail-value a { color: var(--linen); text-decoration: none; }
+    .contact-detail-value a:hover { color: var(--terra); }
+
+    .vibe-note {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .vibe-note-text {
+      font-style: italic; font-size: 1rem; font-weight: 300;
+      color: var(--sand); opacity: 0.7; line-height: 1.7;
+    }
+
+    /* RIGHT — FORM */
+    .contact-right {
+      background: var(--linen);
+      padding: 6rem 5rem 6rem 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .form-title {
+      font-size: 1.8rem; font-weight: 500; color: var(--espresso);
+      margin-bottom: 0.5rem; line-height: 1.2;
+    }
+    .form-subtitle {
+      font-size: 0.95rem; font-weight: 300; color: var(--espresso);
+      opacity: 0.6; margin-bottom: 2.5rem;
+    }
+    .form { display: flex; flex-direction: column; gap: 1.4rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field label {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--espresso); opacity: 0.65;
+    }
+    .field input, .field select, .field textarea {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(58,45,40,0.15);
+      padding: 0.85rem 1rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem; font-weight: 300; color: var(--espresso);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--mocha);
+      background: rgba(255,255,255,0.9);
+    }
+    .field textarea { resize: vertical; min-height: 120px; }
+    .field select { cursor: pointer; }
+
+    .submit-btn {
+      display: inline-block; padding: 1rem 2.5rem;
+      background: var(--espresso); color: var(--linen);
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: all 0.3s; align-self: flex-start;
+    }
+    .submit-btn:hover { background: var(--crimson); }
+
+    /* BOTTOM STRIP */
+    .bottom-strip {
+      background: var(--espresso); padding: 3rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .strip-quote {
+      font-style: italic; font-size: 1.2rem; font-weight: 300;
+      color: var(--sand); max-width: 500px; line-height: 1.6;
+    }
+    .strip-logo { font-size: 2rem; font-weight: 600; color: var(--linen); }
+    .strip-logo span { color: var(--mocha); }
+
+    footer {
+      background: var(--espresso); padding: 2rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-tagline { font-style: italic; font-size: 0.85rem; font-weight: 300; color: var(--sand); opacity: 0.5; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-family: 'Copperplate Gothic Light','Copperplate',sans-serif; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sand); text-decoration: none; opacity: 0.6; }
+
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      nav { padding: 1rem 1.5rem; }
+      .contact-left, .contact-right { padding: 4rem 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .bottom-strip, footer { padding: 2.5rem 2rem; flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo"><span>y</span>OURs<span style="color:var(--terra)">.</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="approach.html">Approach</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="contact-layout">
+
+    <div class="contact-left">
+      <p class="page-eyebrow">Let's Connect</p>
+      <h1 class="contact-title">Let's make your<br>brand feel like<br><em>something.</em></h1>
+      <p class="contact-intro">Whether you're just getting started or ready to rethink everything — I'd love to hear about you, your brand, and what you're building.</p>
+
+      <div class="contact-detail">
+        <p class="contact-detail-label">Email</p>
+        <p class="contact-detail-value"><a href="mailto:nattyb9300@yahoo.com">nattyb9300@yahoo.com</a></p>
+      </div>
+      <div class="contact-detail">
+        <p class="contact-detail-label">Phone</p>
+        <p class="contact-detail-value"><a href="tel:9734608226">973.460.8226</a></p>
+      </div>
+
+      <div class="vibe-note">
+        <p class="vibe-note-text">"I like relationships. Real collaboration. Voice notes. Brainstorms. Deep dives. Big ideas. Honest conversations."</p>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <h2 class="form-title">Start the conversation.</h2>
+      <p class="form-subtitle">Tell me a little about you and what you're working on.</p>
+
+      <div class="form">
+        <div class="form-row">
+          <div class="field">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" placeholder="Your first name" />
+          </div>
+          <div class="field">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" placeholder="Your last name" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" />
+        </div>
+        <div class="field">
+          <label for="biz">Business or Brand Name</label>
+          <input type="text" id="biz" name="biz" placeholder="What's the brand?" />
+        </div>
+        <div class="field">
+          <label for="interest">I'm most interested in</label>
+          <select id="interest" name="interest">
+            <option value="">Select a service area...</option>
+            <option>Brand Strategy</option>
+            <option>Omni-Channel Marketing</option>
+            <option>Customer Journey Design</option>
+            <option>Messaging & Brand Voice</option>
+            <option>Research & Audience Insights</option>
+            <option>Creative Collaboration / Ongoing Partnership</option>
+            <option>Not sure yet — let's talk</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Tell me about your brand</label>
+          <textarea id="message" name="message" placeholder="What are you working on? What feels stuck? What are you excited about? I want to hear it all."></textarea>
+        </div>
+        <button type="button" class="submit-btn">Send My Message</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-strip">
+    <p class="strip-quote">"Smart strategy. Human connection. Big-brand thinking with a personal heartbeat."</p>
+    <div class="strip-logo"><span>y</span>OURs.</div>
+  </div>
+
+  <footer>
+    <p class="footer-tagline">Where your brand becomes ours.</p>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="approach.html">Approach</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

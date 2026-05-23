@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — yOURs.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --espresso: #3A2D28;
+      --mocha: #A48374;
+      --terra: #D88B79;
+      --sand: #CBAD8D;
+      --linen: #D1C7BD;
+      --crimson: #A71F13;
+      --off-white: #F7F3EF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: var(--off-white); color: var(--espresso); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(247,243,239,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(58,45,40,0.08);
+    }
+    .nav-logo { font-size: 1.6rem; font-weight: 600; color: var(--espresso); text-decoration: none; }
+    .nav-logo span { color: var(--mocha); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--espresso); text-decoration: none; opacity: 0.7;
+    }
+    .nav-links a.active, .nav-links a:hover { opacity: 1; }
+
+    /* HERO */
+    .page-hero {
+      padding-top: 80px;
+      background: var(--linen);
+      padding-bottom: 0;
+    }
+    .page-hero-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 5rem 5rem 4rem;
+    }
+    .page-eyebrow {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--crimson); margin-bottom: 1.4rem;
+    }
+    .page-title {
+      font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 500;
+      color: var(--espresso); line-height: 1.1;
+    }
+    .page-title em { color: var(--mocha); font-style: italic; }
+    .page-subtitle {
+      font-size: 1.1rem; font-weight: 300; color: var(--espresso);
+      opacity: 0.7; margin-top: 1.5rem; max-width: 560px; line-height: 1.8;
+    }
+
+    /* SERVICES LIST */
+    .services-list {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 5rem 6rem;
+    }
+    .service-row {
+      display: grid; grid-template-columns: 0.3fr 1fr 0.8fr; gap: 3rem;
+      align-items: start;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid rgba(58,45,40,0.1);
+      transition: all 0.2s;
+    }
+    .service-row:first-child { border-top: 1px solid rgba(58,45,40,0.1); margin-top: 3rem; }
+    .service-num {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.55rem; letter-spacing: 0.2em;
+      color: var(--crimson); padding-top: 0.3rem;
+    }
+    .service-main { }
+    .service-name {
+      font-size: 1.8rem; font-weight: 500; color: var(--espresso);
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .service-desc {
+      font-size: 1rem; line-height: 1.9; font-weight: 300;
+      color: var(--espresso); opacity: 0.75;
+    }
+    .service-includes { padding-top: 0.3rem; }
+    .includes-label {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mocha); margin-bottom: 0.9rem;
+    }
+    .includes-item {
+      display: flex; align-items: baseline; gap: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .includes-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--terra); flex-shrink: 0; margin-top: 2px;
+    }
+    .includes-text {
+      font-size: 0.95rem; font-weight: 300; color: var(--espresso); opacity: 0.8;
+    }
+
+    /* DIFFERENTIATOR */
+    .differentiator {
+      background: var(--espresso); padding: 5rem;
+    }
+    .diff-inner { max-width: 1100px; margin: 0 auto; }
+    .diff-label {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--terra); margin-bottom: 2.5rem;
+    }
+    .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .diff-heading {
+      font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 500;
+      color: var(--linen); line-height: 1.25;
+    }
+    .diff-heading em { color: var(--terra); font-style: italic; }
+    .diff-body {
+      font-size: 1.05rem; line-height: 1.95; font-weight: 300;
+      color: var(--sand); opacity: 0.85;
+    }
+    .diff-body p { margin-bottom: 1.2rem; }
+
+    /* CONTACT STRIP */
+    .contact-strip {
+      background: var(--terra); padding: 4rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .contact-strip-text { font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 500; color: var(--espresso); line-height: 1.2; }
+    .contact-strip-text em { font-style: italic; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.6rem; text-align: right; }
+    .contact-links a {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.15em; color: var(--espresso);
+      text-decoration: none; opacity: 0.85;
+    }
+    .contact-cta {
+      display: inline-block; margin-top: 1rem; padding: 0.85rem 2rem;
+      background: var(--espresso); color: var(--linen);
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.3s;
+    }
+    .contact-cta:hover { background: var(--crimson); }
+
+    footer {
+      background: var(--espresso); padding: 2.5rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo { font-size: 1.4rem; font-weight: 600; color: var(--linen); }
+    .footer-logo span { color: var(--mocha); }
+    .footer-tagline { font-style: italic; font-size: 0.85rem; font-weight: 300; color: var(--sand); opacity: 0.7; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--sand); text-decoration: none; opacity: 0.6;
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-hero-inner, .services-list { padding: 3rem 2rem; }
+      .service-row { grid-template-columns: 1fr; gap: 1.2rem; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .differentiator, .contact-strip, footer { padding: 3rem 2rem; }
+      .contact-strip { flex-direction: column; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo"><span>y</span>OURs<span style="color:var(--terra)">.</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="approach.html">Approach</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="page-eyebrow">What We Do</p>
+      <h1 class="page-title">Big-brand thinking.<br><em>Personal heartbeat.</em></h1>
+      <p class="page-subtitle">Every service is built around one belief: brands grow when people feel something. Here's how we make that happen.</p>
+    </div>
+  </section>
+
+  <div class="services-list">
+
+    <div class="service-row">
+      <p class="service-num">01</p>
+      <div class="service-main">
+        <h2 class="service-name">Brand Strategy</h2>
+        <p class="service-desc">Uncovering who you are, what makes you different, and how audiences emotionally connect with your brand. Not just positioning — but the real story underneath it.</p>
+      </div>
+      <div class="service-includes">
+        <p class="includes-label">Includes</p>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Brand identity & positioning</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Story & messaging framework</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Audience emotional mapping</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Competitive landscape review</p></div>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <p class="service-num">02</p>
+      <div class="service-main">
+        <h2 class="service-name">Omni-Channel Marketing</h2>
+        <p class="service-desc">Channel guidance built on where your audience actually lives — not just media spend or budget allocations. Strategy that prioritizes connection over volume.</p>
+      </div>
+      <div class="service-includes">
+        <p class="includes-label">Includes</p>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Channel mix strategy</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Campaign planning & calendars</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Social, email, content, paid</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Performance metrics & reporting</p></div>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <p class="service-num">03</p>
+      <div class="service-main">
+        <h2 class="service-name">Customer Journey Design</h2>
+        <p class="service-desc">End-to-end experience thinking that turns audience insights into brand moments people actually remember. Because the journey IS the brand.</p>
+      </div>
+      <div class="service-includes">
+        <p class="includes-label">Includes</p>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Journey mapping & audit</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Touchpoint optimization</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Retention & loyalty strategy</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Experience recommendations</p></div>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <p class="service-num">04</p>
+      <div class="service-main">
+        <h2 class="service-name">Messaging & Brand Voice</h2>
+        <p class="service-desc">Refining your story so it resonates emotionally, strategically, and consistently. The words that make people feel something — and remember you.</p>
+      </div>
+      <div class="service-includes">
+        <p class="includes-label">Includes</p>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Tone of voice guidelines</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Copy & messaging frameworks</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Taglines & brand statements</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Content strategy & direction</p></div>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <p class="service-num">05</p>
+      <div class="service-main">
+        <h2 class="service-name">Research & Audience Insights</h2>
+        <p class="service-desc">Audience and competitive research that goes beyond the numbers — into behavior, psychology, and trust. New approaches based on trends, landscape, and what actually works.</p>
+      </div>
+      <div class="service-includes">
+        <p class="includes-label">Includes</p>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Audience segmentation & profiling</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Competitive analysis</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Trend research & landscape</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Data storytelling & insights</p></div>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <p class="service-num">06</p>
+      <div class="service-main">
+        <h2 class="service-name">Creative Collaboration</h2>
+        <p class="service-desc">Voice notes. Brainstorms. Big ideas. Little details. I become an extension of your business — someone who wants your brand to succeed as much as you do.</p>
+      </div>
+      <div class="service-includes">
+        <p class="includes-label">Includes</p>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Ongoing brand partnership</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Creative brainstorming sessions</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Campaign ideation & direction</p></div>
+        <div class="includes-item"><div class="includes-dot"></div><p class="includes-text">Real collaboration, not consulting</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="differentiator">
+    <div class="diff-inner">
+      <p class="diff-label">What Makes Yours. Different</p>
+      <div class="diff-grid">
+        <h2 class="diff-heading">I don't work like a detached consultant.<br><em>I work like someone who cares.</em></h2>
+        <div class="diff-body">
+          <p>I don't want clients to feel like "accounts." I like relationships. Real collaboration. Deep dives. Honest conversations.</p>
+          <p>When I work with someone, I'm all in. I become an extension of your business — someone who wants your brand to succeed as much as you do.</p>
+          <p>And maybe that's the unicorn part.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-strip">
+    <div>
+      <p class="contact-strip-text">Ready to make your brand<br><em>feel like something?</em></p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:nattyb9300@yahoo.com">nattyb9300@yahoo.com</a>
+      <a href="tel:9734608226">973.460.8226</a>
+      <a href="contact.html" class="contact-cta">Let's Talk</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><span>y</span>OURs.</div>
+      <p class="footer-tagline">Where your brand becomes ours.</p>
+    </div>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="approach.html">Approach</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Approach — yOURs.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --espresso: #3A2D28;
+      --mocha: #A48374;
+      --terra: #D88B79;
+      --sand: #CBAD8D;
+      --linen: #D1C7BD;
+      --crimson: #A71F13;
+      --off-white: #F7F3EF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: var(--off-white); color: var(--espresso); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(247,243,239,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(58,45,40,0.08);
+    }
+    .nav-logo { font-size: 1.6rem; font-weight: 600; color: var(--espresso); text-decoration: none; }
+    .nav-logo span { color: var(--mocha); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--espresso); text-decoration: none; opacity: 0.7;
+    }
+    .nav-links a.active, .nav-links a:hover { opacity: 1; }
+
+    /* FULL BLEED HERO */
+    .page-hero {
+      padding-top: 80px;
+      min-height: 60vh;
+      background: var(--mocha);
+      display: flex; align-items: center;
+      padding-left: 5rem; padding-right: 5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; bottom: -80px; left: 200px;
+      width: 350px; height: 350px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-inner { max-width: 800px; z-index: 1; }
+    .page-eyebrow {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin-bottom: 1.4rem;
+    }
+    .page-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 500;
+      color: var(--linen); line-height: 1.1; margin-bottom: 2rem;
+    }
+    .page-title em { color: var(--off-white); font-style: italic; }
+    .page-subtitle {
+      font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.8;
+    }
+
+    /* BLEND SECTION */
+    .blend {
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: var(--espresso);
+    }
+    .blend-left {
+      padding: 5rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .blend-right { padding: 5rem; }
+    .section-label {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--terra); margin-bottom: 2rem;
+    }
+    .blend-pair {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+    .bp-left {
+      font-size: 1rem; font-weight: 400; color: var(--linen); flex: 1; text-align: right;
+    }
+    .bp-divider {
+      width: 24px; height: 1px; background: var(--terra); flex-shrink: 0;
+    }
+    .bp-right {
+      font-size: 1rem; font-weight: 300; color: var(--sand); flex: 1;
+      font-style: italic;
+    }
+    .blend-title {
+      font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 500;
+      color: var(--linen); line-height: 1.35; margin-bottom: 2rem;
+    }
+    .blend-title em { color: var(--terra); font-style: italic; }
+    .blend-body {
+      font-size: 1rem; line-height: 1.95; font-weight: 300;
+      color: var(--sand); opacity: 0.85;
+    }
+    .blend-body p { margin-bottom: 1rem; }
+
+    /* PHILOSOPHY SECTION */
+    .philosophy {
+      padding: 6rem 5rem; background: var(--off-white);
+    }
+    .phil-inner { max-width: 1100px; margin: 0 auto; }
+    .phil-header { margin-bottom: 4rem; }
+    .phil-title {
+      font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500;
+      color: var(--espresso); line-height: 1.15;
+    }
+    .phil-title em { color: var(--mocha); }
+    .phil-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+    .phil-card {
+      padding: 2.5rem;
+      background: var(--linen);
+      position: relative;
+    }
+    .phil-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--crimson);
+    }
+    .phil-card-title {
+      font-size: 1.25rem; font-weight: 500; color: var(--espresso);
+      margin-bottom: 0.8rem;
+    }
+    .phil-card-body {
+      font-size: 0.98rem; line-height: 1.85; font-weight: 300;
+      color: var(--espresso); opacity: 0.8;
+    }
+
+    /* PROCESS */
+    .process {
+      background: var(--linen); padding: 6rem 5rem;
+    }
+    .process-inner { max-width: 1100px; margin: 0 auto; }
+    .process-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 500;
+      color: var(--espresso); margin-bottom: 3.5rem; line-height: 1.2;
+    }
+    .process-title em { color: var(--mocha); }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: grid; grid-template-columns: 60px 1fr;
+      gap: 2rem; padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(58,45,40,0.12);
+    }
+    .step-num {
+      font-size: 2.5rem; font-weight: 300; color: var(--terra);
+      line-height: 1; font-style: italic;
+    }
+    .step-content { }
+    .step-title { font-size: 1.2rem; font-weight: 500; color: var(--espresso); margin-bottom: 0.5rem; }
+    .step-desc { font-size: 0.98rem; line-height: 1.85; font-weight: 300; color: var(--espresso); opacity: 0.75; }
+
+    /* CONTACT STRIP */
+    .contact-strip { background: var(--terra); padding: 4rem 5rem; display: flex; align-items: center; justify-content: space-between; }
+    .contact-strip-text { font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 500; color: var(--espresso); line-height: 1.2; }
+    .contact-strip-text em { font-style: italic; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.6rem; text-align: right; }
+    .contact-links a { font-family: 'Copperplate Gothic Light','Copperplate',sans-serif; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--espresso); text-decoration: none; opacity: 0.85; }
+    .contact-cta { display: inline-block; margin-top: 1rem; padding: 0.85rem 2rem; background: var(--espresso); color: var(--linen); font-family: 'Copperplate Gothic Light','Copperplate',sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+    .contact-cta:hover { background: var(--crimson); }
+
+    footer { background: var(--espresso); padding: 2.5rem 5rem; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-size: 1.4rem; font-weight: 600; color: var(--linen); }
+    .footer-logo span { color: var(--mocha); }
+    .footer-tagline { font-style: italic; font-size: 0.85rem; font-weight: 300; color: var(--sand); opacity: 0.7; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-family: 'Copperplate Gothic Light','Copperplate',sans-serif; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sand); text-decoration: none; opacity: 0.6; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-hero { padding: 100px 2rem 4rem; }
+      .blend { grid-template-columns: 1fr; }
+      .blend-left, .blend-right { padding: 3rem 2rem; }
+      .philosophy, .process { padding: 3rem 2rem; }
+      .phil-grid { grid-template-columns: 1fr; }
+      .contact-strip { flex-direction: column; gap: 2rem; padding: 3rem 2rem; }
+      footer { padding: 2.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo"><span>y</span>OURs<span style="color:var(--terra)">.</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="approach.html" class="active">Approach</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <div class="hero-inner">
+      <p class="page-eyebrow">My Approach</p>
+      <h1 class="page-title">Most brands study<br>their category.<br><em>I study the people.</em></h1>
+      <p class="page-subtitle">The magic is usually hiding underneath the numbers — in emotion, psychology, trust, aspiration, connection, and experience.</p>
+    </div>
+  </section>
+
+  <section class="blend">
+    <div class="blend-left">
+      <p class="section-label">The Blend</p>
+      <div class="blend-pair">
+        <p class="bp-left">Big-brand experience</p>
+        <div class="bp-divider"></div>
+        <p class="bp-right">personal partnership</p>
+      </div>
+      <div class="blend-pair">
+        <p class="bp-left">Metrics</p>
+        <div class="bp-divider"></div>
+        <p class="bp-right">instinct</p>
+      </div>
+      <div class="blend-pair">
+        <p class="bp-left">AI tools</p>
+        <div class="bp-divider"></div>
+        <p class="bp-right">human emotion</p>
+      </div>
+      <div class="blend-pair">
+        <p class="bp-left">Strategy</p>
+        <div class="bp-divider"></div>
+        <p class="bp-right">imagination</p>
+      </div>
+      <div class="blend-pair">
+        <p class="bp-left">Insight</p>
+        <div class="bp-divider"></div>
+        <p class="bp-right">intuition</p>
+      </div>
+    </div>
+    <div class="blend-right">
+      <h2 class="blend-title">Because data matters.<br><em>But human behavior matters more.</em></h2>
+      <div class="blend-body">
+        <p>I don't work like a detached consultant. And I don't want clients to feel like "accounts."</p>
+        <p>I like relationships. Real collaboration. Voice notes. Brainstorms. Deep dives. Big ideas. Little details. Creative energy. Honest conversations.</p>
+        <p>I become an extension of your business — someone who wants your brand to succeed as much as you do.</p>
+        <p>Because when I work with someone, I'm all in.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy">
+    <div class="phil-inner">
+      <div class="phil-header">
+        <p class="section-label">Philosophy</p>
+        <h2 class="phil-title">Smart strategy.<br><em>Human connection.</em></h2>
+      </div>
+      <div class="phil-grid">
+        <div class="phil-card">
+          <h3 class="phil-card-title">Emotion First, Data Always</h3>
+          <p class="phil-card-body">Being emotion-first is a huge differentiator. It leads into data — not away from it. The combination of emotional intelligence and metrics-based thinking is rare, and it's what makes the work resonate.</p>
+        </div>
+        <div class="phil-card">
+          <h3 class="phil-card-title">The Whole Journey</h3>
+          <p class="phil-card-body">Cross-category experience allows me to think of end-to-end journeys. Not just campaigns — but every touchpoint a person has with your brand, from first impression to loyal advocate.</p>
+        </div>
+        <div class="phil-card">
+          <h3 class="phil-card-title">Partnership Over Project</h3>
+          <p class="phil-card-body">The part I've always loved most is the people. The conversations. The spark behind an idea. That's why I don't take on "accounts" — I take on partners whose success I'm genuinely invested in.</p>
+        </div>
+        <div class="phil-card">
+          <h3 class="phil-card-title">Bringing the Big to the Local</h3>
+          <p class="phil-card-body">Enterprise brand experience — all categories, famous labels, household names — brought to a personal, local level. You get big-brand thinking with the warmth of a business that actually knows your name.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="process-inner">
+      <p class="section-label">How We Work Together</p>
+      <h2 class="process-title">A process built around<br><em>clarity, connection, and results.</em></h2>
+      <div class="steps">
+        <div class="step">
+          <p class="step-num">1</p>
+          <div class="step-content">
+            <h3 class="step-title">Deep Discovery</h3>
+            <p class="step-desc">We start with real conversation — about your brand, your audience, your goals, and what's already working (or not). This is where I learn who you are and what you actually need.</p>
+          </div>
+        </div>
+        <div class="step">
+          <p class="step-num">2</p>
+          <div class="step-content">
+            <h3 class="step-title">Research & Insight</h3>
+            <p class="step-desc">Audience research, competitive landscape, trend analysis. I go beyond the surface to understand behavior, emotion, and opportunity — then translate it into actionable strategy.</p>
+          </div>
+        </div>
+        <div class="step">
+          <p class="step-num">3</p>
+          <div class="step-content">
+            <h3 class="step-title">Strategy & Storytelling</h3>
+            <p class="step-desc">Building the plan — brand strategy, messaging, channel guidance, customer journey — rooted in insights and designed to make people feel something when they encounter your brand.</p>
+          </div>
+        </div>
+        <div class="step">
+          <p class="step-num">4</p>
+          <div class="step-content">
+            <h3 class="step-title">Collaboration & Execution</h3>
+            <p class="step-desc">This is where I truly become an extension of your team. Voice notes, brainstorms, feedback loops, creative direction. Ongoing, real partnership — not a deliverable dropped and forgotten.</p>
+          </div>
+        </div>
+        <div class="step">
+          <p class="step-num">5</p>
+          <div class="step-content">
+            <h3 class="step-title">Measure, Learn, Evolve</h3>
+            <p class="step-desc">Metrics-based thinking throughout. We track what matters, interpret the story behind the data, and continuously refine — because great brands aren't built once, they're built over time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-strip">
+    <div>
+      <p class="contact-strip-text">Ready to make your brand<br><em>feel like something?</em></p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:nattyb9300@yahoo.com">nattyb9300@yahoo.com</a>
+      <a href="tel:9734608226">973.460.8226</a>
+      <a href="contact.html" class="contact-cta">Let's Talk</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><span>y</span>OURs.</div>
+      <p class="footer-tagline">Where your brand becomes ours.</p>
+    </div>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="approach.html">Approach</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

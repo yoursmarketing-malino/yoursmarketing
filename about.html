@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — yOURs.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --espresso: #3A2D28;
+      --mocha: #A48374;
+      --terra: #D88B79;
+      --sand: #CBAD8D;
+      --linen: #D1C7BD;
+      --crimson: #A71F13;
+      --off-white: #F7F3EF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: var(--off-white); color: var(--espresso); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(247,243,239,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(58,45,40,0.08);
+    }
+    .nav-logo { font-size: 1.6rem; font-weight: 600; color: var(--espresso); text-decoration: none; }
+    .nav-logo span { color: var(--mocha); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--espresso); text-decoration: none; opacity: 0.7; transition: opacity 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding-top: 80px;
+      background: var(--espresso);
+      display: grid; grid-template-columns: 1fr 1fr; min-height: 52vh;
+    }
+    .page-hero-left {
+      padding: 5rem 4rem 5rem 5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .page-eyebrow {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--terra); margin-bottom: 1.2rem;
+    }
+    .page-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 500; color: var(--linen); line-height: 1.05;
+    }
+    .page-title em { color: var(--mocha); font-style: italic; }
+    .page-hero-right {
+      padding: 5rem 5rem 5rem 3rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .page-hero-right p {
+      font-style: italic; font-size: 1.25rem; font-weight: 300;
+      color: var(--sand); line-height: 1.7; max-width: 420px;
+    }
+
+    /* STORY SECTION */
+    .story {
+      max-width: 1100px; margin: 0 auto;
+      padding: 6rem 5rem;
+      display: grid; grid-template-columns: 0.4fr 1fr; gap: 5rem; align-items: start;
+    }
+    .story-sidebar {
+      position: sticky; top: 120px;
+    }
+    .section-label {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--crimson); margin-bottom: 1rem;
+    }
+    .sidebar-title {
+      font-size: 1.8rem; font-weight: 500; line-height: 1.3; color: var(--espresso);
+    }
+    .sidebar-title em { color: var(--mocha); }
+    .crimson-bar {
+      width: 3px; height: 40px; background: var(--crimson); margin-top: 1.5rem;
+    }
+    .story-body p {
+      font-size: 1.08rem; line-height: 2; font-weight: 300;
+      color: var(--espresso); opacity: 0.85; margin-bottom: 1.6rem;
+    }
+    .story-body p strong { font-weight: 500; opacity: 1; color: var(--mocha); }
+
+    /* VIBE SECTION */
+    .vibe {
+      background: var(--linen);
+      padding: 5rem;
+    }
+    .vibe-inner { max-width: 1100px; margin: 0 auto; }
+    .vibe-title {
+      font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 500;
+      color: var(--espresso); margin-bottom: 3rem;
+    }
+    .vibe-title em { color: var(--mocha); }
+    .vibe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .vibe-card {
+      background: rgba(255,255,255,0.6);
+      padding: 2rem 1.8rem;
+      border-bottom: 2px solid var(--terra);
+    }
+    .vibe-word {
+      font-size: 1.2rem; font-weight: 500; color: var(--espresso); margin-bottom: 0.5rem;
+    }
+    .vibe-opp {
+      font-size: 0.9rem; font-weight: 300; color: var(--mocha); font-style: italic;
+    }
+
+    /* QUOTES SECTION */
+    .brand-voice {
+      background: var(--espresso);
+      padding: 5rem;
+    }
+    .brand-voice-inner { max-width: 900px; margin: 0 auto; }
+    .bv-label {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--terra); margin-bottom: 2.5rem;
+    }
+    .quote-list { display: flex; flex-direction: column; gap: 2rem; }
+    .brand-quote {
+      font-style: italic; font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 300;
+      color: var(--linen); line-height: 1.5; padding-left: 1.5rem;
+      border-left: 2px solid var(--crimson);
+    }
+
+    /* CONTACT STRIP */
+    .contact-strip {
+      background: var(--terra); padding: 4rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .contact-strip-text { font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 500; color: var(--espresso); line-height: 1.2; }
+    .contact-strip-text em { font-style: italic; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.6rem; text-align: right; }
+    .contact-links a {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.15em; color: var(--espresso);
+      text-decoration: none; opacity: 0.85;
+    }
+    .contact-cta {
+      display: inline-block; margin-top: 1rem; padding: 0.85rem 2rem;
+      background: var(--espresso); color: var(--linen);
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.3s;
+    }
+    .contact-cta:hover { background: var(--crimson); }
+
+    footer {
+      background: var(--espresso); padding: 2.5rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo { font-size: 1.4rem; font-weight: 600; color: var(--linen); }
+    .footer-logo span { color: var(--mocha); }
+    .footer-tagline { font-style: italic; font-size: 0.85rem; font-weight: 300; color: var(--sand); opacity: 0.7; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-family: 'Copperplate Gothic Light', 'Copperplate', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--sand); text-decoration: none; opacity: 0.6;
+    }
+
+    @media (max-width: 900px) {
+      .page-hero, .story { grid-template-columns: 1fr; }
+      .page-hero-left, .page-hero-right { padding: 3rem 2rem; }
+      .story { padding: 3rem 2rem; }
+      .story-sidebar { position: static; }
+      .vibe-grid { grid-template-columns: 1fr 1fr; }
+      nav { padding: 1rem 1.5rem; }
+      .contact-strip { flex-direction: column; gap: 2rem; }
+      footer, .vibe, .brand-voice { padding: 3rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo"><span>y</span>OURs<span style="color:var(--terra)">.</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="approach.html">Approach</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-left">
+      <p class="page-eyebrow">About Yours.</p>
+      <h1 class="page-title">Built for brands<br>who want more than<br><em>"marketing."</em></h1>
+    </div>
+    <div class="page-hero-right">
+      <p>"I built Yours. for the brands, business owners, dreamers, and doers who want someone who actually gets it. Someone who cares as much as they do."</p>
+    </div>
+  </section>
+
+  <div class="story">
+    <div class="story-sidebar">
+      <p class="section-label">My Story</p>
+      <h2 class="sidebar-title">25+ years.<br><em>All the moving pieces.</em></h2>
+      <div class="crimson-bar"></div>
+    </div>
+    <div class="story-body">
+      <p>For over 25 years, I've worked across agencies, global brands, launches, campaigns, customer journeys, strategy decks, brainstorms, research, reporting, and all the moving pieces in between.</p>
+      <p>I've worked on <strong>household names, luxury brands, healthcare innovators, retailers, telecom giants, beauty brands</strong>, and everything in between. Big-brand experience, every category, brought down to a personal, local level.</p>
+      <p>But honestly? The part I've always loved most is the people. The conversations. The energy. The spark behind an idea. The figuring-it-out together.</p>
+      <p>That's why Yours. feels different. It's strategic and thoughtful — but also personal, collaborative, imaginative, emotional, curious, and deeply invested in the humans behind the brand.</p>
+      <p>I don't believe brands grow because they post more content. <strong>I think they grow when people feel something.</strong> That's where I come in.</p>
+      <p>I help businesses uncover who they are, what makes them different, how audiences emotionally connect with them — and how to turn that into a brand experience people actually remember.</p>
+    </div>
+  </div>
+
+  <section class="vibe">
+    <div class="vibe-inner">
+      <p class="section-label">The Yours. Difference</p>
+      <h2 class="vibe-title">Polished but soft.<br><em>Smart but playful. Strategic but emotional.</em></h2>
+      <div class="vibe-grid">
+        <div class="vibe-card">
+          <p class="vibe-word">Emotionally open</p>
+          <p class="vibe-opp">hopeful without being naïve</p>
+        </div>
+        <div class="vibe-card">
+          <p class="vibe-word">Feminine but intelligent</p>
+          <p class="vibe-opp">nostalgic and imaginative</p>
+        </div>
+        <div class="vibe-card">
+          <p class="vibe-word">Deeply human</p>
+          <p class="vibe-opp">intuitive and romantic about possibility</p>
+        </div>
+        <div class="vibe-card">
+          <p class="vibe-word">Warm and approachable</p>
+          <p class="vibe-opp">strategic enough to feel trustworthy</p>
+        </div>
+        <div class="vibe-card">
+          <p class="vibe-word">Credible authority</p>
+          <p class="vibe-opp">feminine without losing authority</p>
+        </div>
+        <div class="vibe-card">
+          <p class="vibe-word">The unicorn part</p>
+          <p class="vibe-opp">someone you actually want to work with</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="brand-voice">
+    <div class="brand-voice-inner">
+      <p class="bv-label">Brand Voice</p>
+      <div class="quote-list">
+        <p class="brand-quote">"I believe brands grow when people feel seen."</p>
+        <p class="brand-quote">"There's data in behavior, but there's magic in emotion."</p>
+        <p class="brand-quote">"The best brands don't just perform — they mean something."</p>
+        <p class="brand-quote">"I believe intuition matters. So do insights."</p>
+        <p class="brand-quote">"Dreams are possible, but strategy helps build them."</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-strip">
+    <div>
+      <p class="contact-strip-text">Ready to make your brand<br><em>feel like something?</em></p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:nattyb9300@yahoo.com">nattyb9300@yahoo.com</a>
+      <a href="tel:9734608226">973.460.8226</a>
+      <a href="contact.html" class="contact-cta">Let's Talk</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><span>y</span>OURs.</div>
+      <p class="footer-tagline">Where your brand becomes ours.</p>
+    </div>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="approach.html">Approach</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>
